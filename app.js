@@ -44,6 +44,17 @@ const onScroll = () => nav.classList.toggle("solid", window.scrollY > 40);
 window.addEventListener("scroll", onScroll, { passive: true });
 onScroll();
 
+// ---------- carga de fotos un poco antes de llegar a ellas ----------
+const imgIO = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) {
+    const img = e.target;
+    img.removeAttribute("loading");
+    if (!img.complete || !img.naturalWidth) img.src = img.getAttribute("src");
+    imgIO.unobserve(img);
+  }
+}), { rootMargin: "800px 0px" });
+document.querySelectorAll('img[loading="lazy"]').forEach(img => imgIO.observe(img));
+
 // ---------- animaciones al bajar ----------
 const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 

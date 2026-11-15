@@ -1,3 +1,12 @@
 modelos/
 .claude/
 *.pdf
+/Flay_*.jpg
+*.xlsx
+*.xls
+*.docx
+/*.jpg
+/*.jpeg
+/*.png
+/*.mp4
+/*.mov
