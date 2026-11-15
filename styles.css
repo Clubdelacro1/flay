@@ -472,3 +472,11 @@ footer.motif::after{opacity:.08;left:auto;right:var(--pad);top:70px;transform:no
   .brand span{display:none}
   .menu a:not(.btn){padding:8px 12px;font-size:13px}
 }
+
+/* equipo de 4 profes */
+.profes-grid{grid-template-columns:repeat(4,1fr)!important}
+.profes-grid .ph{aspect-ratio:4/5;object-position:50% 25%}
+.profe .apodo{display:block;font-family:Fraunces,Georgia,serif;font-style:italic;font-weight:400;font-size:17px;color:var(--lav-deep);margin-top:2px}
+.profes-grid .bd p{font-size:14.5px}
+@media (max-width:1180px){.profes-grid{grid-template-columns:1fr 1fr!important}}
+@media (max-width:640px){.profes-grid{grid-template-columns:1fr!important}}
