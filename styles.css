@@ -12,6 +12,7 @@
   --pad:clamp(20px,5vw,72px);
 }
 *{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:clip}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 body{font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--paper);color:var(--ink);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
