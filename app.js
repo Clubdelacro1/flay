@@ -80,7 +80,7 @@ function countUp(el) {
   const to = +el.dataset.count, from = +(el.dataset.from || 0), t0 = performance.now(), dur = 1600;
   const step = now => {
     const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
-    el.textContent = Math.round(from + (to - from) * e);
+    el.textContent = (el.dataset.prefix || "") + Math.round(from + (to - from) * e);
     if (p < 1) requestAnimationFrame(step);
   };
   requestAnimationFrame(step);
