@@ -97,22 +97,16 @@ document.querySelectorAll(".rv, .clip").forEach(el => io.observe(el));
 // movimiento suave de fotos grandes (parallax) + barra de progreso
 const bar = document.createElement("div"); bar.className = "progress"; document.body.appendChild(bar);
 const heroImg = document.querySelector(".hero .pic img");
-const lugarImg = document.querySelector(".lugar .pic img");
 let ticking = false;
 function onMove() {
   const y = window.scrollY, H = document.documentElement.scrollHeight - innerHeight;
   bar.style.transform = `scaleX(${H > 0 ? y / H : 0})`;
   if (!calm) {
     if (heroImg && y < innerHeight * 1.2) heroImg.style.translate = `0 ${y * 0.18}px`;
-    if (lugarImg) {
-      const r = lugarImg.parentElement.getBoundingClientRect();
-      if (r.bottom > 0 && r.top < innerHeight) lugarImg.style.translate = `0 ${(r.top - innerHeight / 2) * -0.08}px`;
-    }
   }
   ticking = false;
 }
 window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(onMove); } }, { passive: true });
-if (lugarImg) lugarImg.style.scale = "1.12";
 onMove();
 
 // ---------- ventana de inscripción ----------
