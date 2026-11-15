@@ -412,7 +412,7 @@ section,.stats,footer{position:relative}
 .motif > .wrap{position:relative;z-index:1}
 .motif::after{content:"";position:absolute;z-index:0;width:min(480px,70vw);aspect-ratio:790/562;left:50%;top:50%;transform:translate(-50%,-50%);background:currentColor;-webkit-mask:url(img/logo.png) center/contain no-repeat;mask:url(img/logo.png) center/contain no-repeat;opacity:.06;pointer-events:none}
 .stats.motif::after{width:220px;opacity:.08}
-footer.motif::after{opacity:.08}
+footer.motif::after{opacity:.08;left:auto;right:var(--pad);top:70px;transform:none;width:min(420px,40vw)}
 .pillars .card li::before{border-radius:1px;transform:rotate(45deg);width:6px;height:6px;top:.7em}
 .rv.in .kicker::after,.head .kicker::after{border-radius:0}
 
