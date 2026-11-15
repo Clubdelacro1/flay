@@ -480,3 +480,12 @@ footer.motif::after{opacity:.08;left:auto;right:var(--pad);top:70px;transform:no
 .profes-grid .bd p{font-size:14.5px}
 @media (max-width:1180px){.profes-grid{grid-template-columns:1fr 1fr!important}}
 @media (max-width:640px){.profes-grid{grid-template-columns:1fr!important}}
+
+/* celular: puntitos arriba de la foto y frase por encima de las montañas */
+@media (max-width:980px){
+  .dots{top:auto;bottom:auto;top:calc(22% + 6px);left:16px;right:auto}
+  .hero .glass{bottom:56px}
+}
+@media (max-width:640px){
+  .hero .glass{bottom:64px;font-size:14px;padding:16px 18px}
+}
