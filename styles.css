@@ -410,9 +410,9 @@ section,.stats,footer{position:relative}
 
 /* forma del logo como dibujo de fondo */
 .motif > .wrap{position:relative;z-index:1}
-.motif::after{content:"";position:absolute;z-index:0;width:min(480px,60vw);aspect-ratio:790/562;right:-70px;bottom:50px;background:currentColor;-webkit-mask:url(img/logo.png) center/contain no-repeat;mask:url(img/logo.png) center/contain no-repeat;opacity:.06;pointer-events:none}
-.stats.motif::after{width:240px;bottom:auto;top:50%;transform:translateY(-40%);right:3%;opacity:.08}
-footer.motif::after{opacity:.09;right:-40px;bottom:auto;top:60px}
+.motif::after{content:"";position:absolute;z-index:0;width:min(480px,70vw);aspect-ratio:790/562;left:50%;top:50%;transform:translate(-50%,-50%);background:currentColor;-webkit-mask:url(img/logo.png) center/contain no-repeat;mask:url(img/logo.png) center/contain no-repeat;opacity:.06;pointer-events:none}
+.stats.motif::after{width:220px;opacity:.08}
+footer.motif::after{opacity:.08}
 .pillars .card li::before{border-radius:1px;transform:rotate(45deg);width:6px;height:6px;top:.7em}
 .rv.in .kicker::after,.head .kicker::after{border-radius:0}
 
