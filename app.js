@@ -129,8 +129,8 @@ if (slides.length > 1) {
     };
     if (slides[i].complete && slides[i].naturalWidth) go(); else slides[i].addEventListener("load", go, { once: true });
   }
-  const restart = () => { clearInterval(timer); timer = setInterval(() => show((cur + 1) % slides.length), 6500); };
-  setTimeout(() => load(slides[1]), 2500);
+  const restart = () => { clearInterval(timer); timer = setInterval(() => show((cur + 1) % slides.length), 4000); };
+  setTimeout(() => load(slides[1]), 800);
   if (!calm) restart();
 }
 

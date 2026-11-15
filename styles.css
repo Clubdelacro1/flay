@@ -396,8 +396,8 @@ html.splashing{--hd:1.9s}
 
 /* portada: fotos que cambian con zoom suave */
 .hero .txt{padding-bottom:110px}
-.hero .slides img{opacity:0;animation:none;transition:opacity 1.6s ease}
-.hero .slides img.on{opacity:1;animation:kenburns 9s ease-out both}
+.hero .slides img{opacity:0;animation:none;transition:opacity 1.1s ease}
+.hero .slides img.on{opacity:1;animation:kenburns 6s ease-out both}
 @keyframes kenburns{from{transform:scale(1.14)}to{transform:scale(1)}}
 .dots{position:absolute;left:28%;bottom:70px;z-index:3;display:flex;gap:8px}
 .dots button{width:8px;height:8px;border-radius:50%;border:0;background:rgba(255,255,255,.45);cursor:pointer;padding:0;transition:width .4s,background .4s}
