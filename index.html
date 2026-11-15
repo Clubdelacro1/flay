@@ -14,10 +14,31 @@
 <link rel="icon" href="img/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=9">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=10">
 </head>
 <body>
+
+<!-- ===== INTRO CON LOGO ===== -->
+<div class="splash" id="splash" aria-hidden="true">
+  <div class="splash-logo"><img src="img/logo.png" alt=""></div>
+  <div class="splash-txt">Formación Latinoamericana de Acroyoga</div>
+</div>
+<script>
+  // la intro con el logo se ve una sola vez por visita
+  try {
+    if (sessionStorage.getItem("flay-intro") || matchMedia("(prefers-reduced-motion: reduce)").matches) document.getElementById("splash").classList.add("skip");
+    else { sessionStorage.setItem("flay-intro", "1"); document.documentElement.classList.add("splashing"); }
+  } catch (e) { document.getElementById("splash").classList.add("skip"); }
+</script>
+
+<!-- forma de montañas (se reutiliza entre secciones) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="sierra" viewBox="0 0 1440 100" preserveAspectRatio="none">
+    <path opacity=".45" d="M0 100V58l70-14 60 10 90-30 70 18 80-22 90 28 70-12 90 20 100-40 80 24 90-16 80 22 90-30 70 16 90-12 80 20 60-8 50 10v48z"/>
+    <path d="M0 100V70l90-18 70 14 110-34 80 26 70-14 100 30 90-22 80 12 110-36 90 30 70-10 90 24 100-28 80 18 80-8 60 14v42z"/>
+  </symbol>
+</svg>
 
 <!-- ===== NAV ===== -->
 <header class="nav" id="nav">
@@ -52,14 +73,19 @@
       <div><small>Incluye</small><b>Alojamiento + 3 comidas</b></div>
     </div>
   </div>
-  <div class="pic">
-    <img src="img/sierras.jpg" alt="Pareja haciendo acroyoga en las sierras de Córdoba">
+  <div class="pic slides" id="slides">
+    <img class="on" src="img/sierras.jpg" alt="Pareja haciendo acroyoga en las sierras de Córdoba">
+    <img data-src="img/nuevas/flay-2805.jpg" alt="Práctica de acroyoga en el parque de Casa Buda" style="object-position:50% 40%">
+    <img data-src="img/nuevas/flay-2534.jpg" alt="Clase en el salón circular de Casa Buda">
+    <img data-src="img/nuevas/flay-2806.jpg" alt="Ronda junto al río">
+    <img data-src="img/nuevas/flay-2494.jpg" alt="Vuelo de acroyoga en el salón" style="object-position:50% 30%">
     <div class="glass">“La montaña y la naturaleza nos sostienen. El silencio de la inmensidad nos aporta claridad para mirarnos adentro.”</div>
   </div>
 </section>
 
 <!-- ===== INTRO ===== -->
 <section class="intro" id="formacion">
+  <svg class="sierra" style="color:var(--paper)" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><use href="#sierra"/></svg>
   <div class="wrap grid">
     <div class="rv">
       <div class="kicker">La formación</div>
@@ -83,7 +109,8 @@
 </section>
 
 <!-- ===== STATS ===== -->
-<div class="stats">
+<div class="stats motif">
+  <svg class="sierra" style="color:var(--ink)" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><use href="#sierra"/></svg>
   <div class="wrap row">
     <div class="rv"><b data-count="2017" data-from="2000">2017</b><span>formando profes</span></div>
     <div class="rv"><b data-count="12">12</b><span>días de inmersión</span></div>
@@ -94,6 +121,7 @@
 
 <!-- ===== CONTENIDO ===== -->
 <section class="vivir" id="contenido">
+  <svg class="sierra" style="color:var(--lav-soft)" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><use href="#sierra"/></svg>
   <div class="wrap">
     <div class="head rv">
       <div><div class="kicker">Contenido</div><h2>Tres caminos,<br><b>una formación</b></h2></div>
@@ -216,6 +244,7 @@
 
 <!-- ===== LUGAR ===== -->
 <section class="lugar" id="lugar">
+  <svg class="sierra" style="color:var(--ink)" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><use href="#sierra"/></svg>
   <div class="grid">
     <div class="pic"><img src="img/buda/salon.jpg" alt="El salón de práctica de Casa Buda, con techo de madera y ventanales al monte" loading="lazy"></div>
     <div class="txt rv">
@@ -227,6 +256,15 @@
         <div><small>Llegada</small><b>3 de febrero, 14 h</b></div>
         <div><small>Salida</small><b>14 de febrero, 15 h</b><span>después del almuerzo</span></div>
       </div>
+      <div class="count" id="count" data-to="2027-02-03T14:00:00-03:00">
+        <small>Faltan para empezar</small>
+        <div class="count-row">
+          <div><b data-u="d">--</b><span>días</span></div>
+          <div><b data-u="h">--</b><span>horas</span></div>
+          <div><b data-u="m">--</b><span>minutos</span></div>
+          <div><b data-u="s">--</b><span>segundos</span></div>
+        </div>
+      </div>
       <a class="btn btn-ghost" href="https://www.instagram.com/casabuda_traslasierra/" target="_blank" rel="noopener" style="margin-top:28px;align-self:flex-start">Conocé Casa Buda en Instagram →</a>
     </div>
   </div>
@@ -236,10 +274,20 @@
     <figure class="rv"><img src="img/buda/frutas.jpg" alt="Desayuno con frutas al aire libre" loading="lazy"><figcaption>Desayunos al aire libre</figcaption></figure>
     <figure class="rv"><img src="img/buda/sierras.jpg" alt="Vista de las sierras de Traslasierra desde Casa Buda" loading="lazy"><figcaption>Las sierras</figcaption></figure>
   </div>
+  <div class="mapa">
+    <div class="mapa-txt rv">
+      <div class="kicker">Cómo llegar</div>
+      <h3>Casa Buda, <b>Traslasierra</b></h3>
+      <p>Valle de Traslasierra, Córdoba, Argentina.</p>
+      <a class="btn btn-white" href="https://www.google.com/maps/search/?api=1&query=Casa+Buda+Traslasierra" target="_blank" rel="noopener">Abrir en Google Maps →</a>
+    </div>
+    <div class="mapa-frame rv" id="mapaFrame" data-src="https://www.google.com/maps?q=Casa+Buda+Traslasierra&z=11&output=embed"></div>
+  </div>
 </section>
 
 <!-- ===== VALORES ===== -->
-<section class="valores" id="valores">
+<section class="valores motif" id="valores">
+  <svg class="sierra" style="color:var(--lav-soft)" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><use href="#sierra"/></svg>
   <div class="wrap">
     <div class="head rv">
       <div><div class="kicker">Valores y alojamiento</div><h2>Todo incluido, <b>vos elegís dónde dormir</b></h2></div>
@@ -386,7 +434,8 @@
 </div>
 
 <!-- ===== FAQ ===== -->
-<section class="faq" id="preguntas">
+<section class="faq motif" id="preguntas">
+  <svg class="sierra" style="color:var(--lav-soft)" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><use href="#sierra"/></svg>
   <div class="wrap grid">
     <div class="rv"><div class="kicker">Preguntas frecuentes</div><h2>Lo que más <b>nos preguntan</b></h2></div>
     <div class="rv">
@@ -418,7 +467,8 @@
 </section>
 
 <!-- ===== FOOTER ===== -->
-<footer>
+<footer class="motif">
+  <svg class="sierra" style="color:var(--lav)" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true"><use href="#sierra"/></svg>
   <div class="wrap">
     <img class="flogo" src="img/logo.png" alt="FLAY">
     <div class="big">Nos vemos en<br><b>las sierras.</b></div>
@@ -454,6 +504,6 @@
   <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.900.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3M12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.4-1.5-5.2 0-5.4 4.4-9.8 9.8-9.8 2.6 0 5.1 1 6.9 2.9 1.9 1.900 2.9 4.300 2.900 6.900 0 5.4-4.4 9.8-9.8 9.8m8.4-18.2C18.1 1.3 15.2.1 12 .1 5.5.1.1 5.4.1 12c0 2.1.5 4.1 1.6 5.9L0 24l6.3-1.6c1.7.9 3.7 1.4 5.700 1.400 6.600 0 11.900-5.300 11.900-11.900 0-3.200-1.200-6.200-3.500-8.300"/></svg>
 </a>
 
-<script src="app.js?v=9"></script>
+<script src="app.js?v=10"></script>
 </body>
 </html>

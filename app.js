@@ -96,18 +96,111 @@ document.querySelectorAll(".rv, .clip").forEach(el => io.observe(el));
 
 // movimiento suave de fotos grandes (parallax) + barra de progreso
 const bar = document.createElement("div"); bar.className = "progress"; document.body.appendChild(bar);
-const heroImg = document.querySelector(".hero .pic img");
 let ticking = false;
 function onMove() {
   const y = window.scrollY, H = document.documentElement.scrollHeight - innerHeight;
   bar.style.transform = `scaleX(${H > 0 ? y / H : 0})`;
-  if (!calm) {
-    if (heroImg && y < innerHeight * 1.2) heroImg.style.translate = `0 ${y * 0.18}px`;
-  }
   ticking = false;
 }
 window.addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(onMove); } }, { passive: true });
 onMove();
+
+// ---------- portada: fotos que cambian solas ----------
+const slides = [...document.querySelectorAll("#slides img")];
+if (slides.length > 1) {
+  const load = img => { if (img.dataset.src && !img.getAttribute("src")) img.src = img.dataset.src; };
+  const dots = document.createElement("div"); dots.className = "dots";
+  slides.forEach((_, i) => {
+    const b = document.createElement("button");
+    b.setAttribute("aria-label", "Foto " + (i + 1));
+    if (i === 0) b.classList.add("on");
+    b.addEventListener("click", () => { show(i); restart(); });
+    dots.appendChild(b);
+  });
+  document.getElementById("slides").appendChild(dots);
+  let cur = 0, timer;
+  function show(i) {
+    load(slides[i]);
+    const go = () => {
+      slides[cur].classList.remove("on"); dots.children[cur].classList.remove("on");
+      cur = i;
+      slides[cur].classList.add("on"); dots.children[cur].classList.add("on");
+      load(slides[(cur + 1) % slides.length]);
+    };
+    if (slides[i].complete && slides[i].naturalWidth) go(); else slides[i].addEventListener("load", go, { once: true });
+  }
+  const restart = () => { clearInterval(timer); timer = setInterval(() => show((cur + 1) % slides.length), 6500); };
+  setTimeout(() => load(slides[1]), 2500);
+  if (!calm) restart();
+}
+
+// ---------- galería que se abre en grande ----------
+const lbImgs = [...document.querySelectorAll(".mosaic img, .buda img")];
+if (lbImgs.length) {
+  const lb = document.createElement("div");
+  lb.className = "lb"; lb.setAttribute("role", "dialog"); lb.setAttribute("aria-modal", "true"); lb.setAttribute("aria-label", "Galería de fotos");
+  lb.innerHTML = '<img alt=""><button class="x" aria-label="Cerrar">×</button><button class="prev" aria-label="Foto anterior">‹</button><button class="next" aria-label="Foto siguiente">›</button><div class="cap"></div>';
+  document.body.appendChild(lb);
+  const big = lb.querySelector("img"), cap = lb.querySelector(".cap");
+  let at = 0;
+  const showLb = i => {
+    at = (i + lbImgs.length) % lbImgs.length;
+    big.classList.remove("ready");
+    big.onload = () => big.classList.add("ready");
+    big.src = lbImgs[at].getAttribute("src"); big.alt = lbImgs[at].alt;
+    cap.textContent = lbImgs[at].alt + "  ·  " + (at + 1) + " / " + lbImgs.length;
+    if (big.complete) big.classList.add("ready");
+  };
+  const openLb = i => { showLb(i); lb.classList.add("open"); document.body.classList.add("locked"); };
+  const closeLb = () => { lb.classList.remove("open"); document.body.classList.remove("locked"); };
+  lbImgs.forEach((img, i) => img.addEventListener("click", () => openLb(i)));
+  lb.querySelector(".x").addEventListener("click", closeLb);
+  lb.querySelector(".prev").addEventListener("click", e => { e.stopPropagation(); showLb(at - 1); });
+  lb.querySelector(".next").addEventListener("click", e => { e.stopPropagation(); showLb(at + 1); });
+  lb.addEventListener("click", e => { if (e.target === lb) closeLb(); });
+  document.addEventListener("keydown", e => {
+    if (!lb.classList.contains("open")) return;
+    if (e.key === "Escape") closeLb();
+    if (e.key === "ArrowLeft") showLb(at - 1);
+    if (e.key === "ArrowRight") showLb(at + 1);
+  });
+  let x0 = null;
+  lb.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener("touchend", e => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 50) showLb(at + (dx < 0 ? 1 : -1));
+    x0 = null;
+  });
+}
+
+// ---------- cuenta regresiva ----------
+const count = document.getElementById("count");
+if (count) {
+  const to = new Date(count.dataset.to).getTime();
+  const el = u => count.querySelector(`[data-u="${u}"]`);
+  const pad = n => String(n).padStart(2, "0");
+  const tick = () => {
+    let s = Math.max(0, Math.floor((to - Date.now()) / 1000));
+    if (s === 0) { count.querySelector("small").textContent = "¡Ya empezó FLAY 2027!"; }
+    const d = Math.floor(s / 86400); s %= 86400;
+    const h = Math.floor(s / 3600); s %= 3600;
+    const m = Math.floor(s / 60); s %= 60;
+    el("d").textContent = d; el("h").textContent = pad(h); el("m").textContent = pad(m); el("s").textContent = pad(s);
+  };
+  tick(); setInterval(tick, 1000);
+}
+
+// ---------- mapa (se carga al acercarse) ----------
+const mapa = document.getElementById("mapaFrame");
+if (mapa) {
+  const mIO = new IntersectionObserver(es => {
+    if (!es[0].isIntersecting) return;
+    mapa.innerHTML = `<iframe src="${mapa.dataset.src}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de Casa Buda, Traslasierra"></iframe>`;
+    mIO.disconnect();
+  }, { rootMargin: "600px 0px" });
+  mIO.observe(mapa);
+}
 
 // ---------- ventana de inscripción ----------
 const modal = document.getElementById("modal");
