@@ -276,3 +276,13 @@ form.addEventListener("submit", async ev => {
     err.style.display = "block";
   }
 });
+
+// ---------- menú: marca la sección en la que estás ----------
+const navLinks = [...document.querySelectorAll('.menu a[href^="#"]:not(.btn)')];
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id));
+}), { rootMargin: "-45% 0px -50% 0px" });
+navLinks.forEach(a => { const s = document.querySelector(a.getAttribute("href")); if (s) secIO.observe(s); });
+const topIO = new IntersectionObserver(es => { if (es[0].isIntersecting) navLinks.forEach(a => a.classList.remove("active")); }, { rootMargin: "-45% 0px -50% 0px" });
+topIO.observe(document.getElementById("top"));

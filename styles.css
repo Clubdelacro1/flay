@@ -459,3 +459,16 @@ footer.motif::after{opacity:.08;left:auto;right:var(--pad);top:70px;transform:no
   .splash{display:none}
   .hero .slides img.on{animation:none}
 }
+
+/* menú con forma de botones (compu) */
+@media (min-width:981px){
+  .menu{gap:8px}
+  .menu a:not(.btn){display:inline-block;padding:9px 16px;border:1px solid rgba(255,255,255,.38);border-radius:999px;opacity:1;font-size:13.5px;transition:background .25s,border-color .25s,color .25s}
+  .menu a:not(.btn):hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.7)}
+  .menu a.active:not(.btn){background:#fff;color:var(--lav-deep);border-color:#fff}
+  .menu .btn{margin-left:8px}
+}
+@media (min-width:981px) and (max-width:1240px){
+  .brand span{display:none}
+  .menu a:not(.btn){padding:8px 12px;font-size:13px}
+}
