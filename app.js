@@ -262,7 +262,7 @@ form.addEventListener("submit", async ev => {
   for (const [k, entry] of Object.entries(FIELDS)) {
     if (k === "acepto") { if (fd.get("acepto")) body.append(entry, "acepto/ agree"); continue; }
     let v = (fd.get(k) || "").toString().trim();
-    if (k === "whatsapp") v = v.replace(/D/g, ""); // el formulario solo acepta números
+    if (k === "whatsapp") v = v.replace(/[^0-9]/g, ""); // el formulario solo acepta números
     if (v) body.append(entry, v);
   }
 
