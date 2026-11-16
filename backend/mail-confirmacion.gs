@@ -9,7 +9,7 @@
  */
 
 const FORM_ID = "1QuPDmNZ53awUW6lgMa2qcn2Pl0xa-BSh-O3Z-2zc2Xk";
-const WEB = "https://clubdelacro1.github.io/flay/";
+const WEB = "https://flayacroyoga.com/";
 
 function instalar() {
   ScriptApp.getProjectTriggers().forEach(t => ScriptApp.deleteTrigger(t));
