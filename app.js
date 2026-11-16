@@ -261,7 +261,8 @@ form.addEventListener("submit", async ev => {
   const body = new URLSearchParams();
   for (const [k, entry] of Object.entries(FIELDS)) {
     if (k === "acepto") { if (fd.get("acepto")) body.append(entry, "acepto/ agree"); continue; }
-    const v = (fd.get(k) || "").toString().trim();
+    let v = (fd.get(k) || "").toString().trim();
+    if (k === "whatsapp") v = v.replace(/D/g, ""); // el formulario solo acepta números
     if (v) body.append(entry, v);
   }
 
