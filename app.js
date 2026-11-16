@@ -5,6 +5,10 @@
 // --- Publicaciones de Instagram que se muestran en la web ---
 // Pegá acá los links de los reels o carruseles (uno por línea, entre comillas).
 // Ejemplo: "https://www.instagram.com/reel/ABC123xyz/",
+// idioma de la página (la versión en inglés está en /en/)
+const EN = document.documentElement.lang === "en";
+const T = (es, en) => (EN ? en : es);
+
 const INSTAGRAM_POSTS = [
   "https://www.instagram.com/p/DdCnHwulp5J/",
   "https://www.instagram.com/p/DfQTcE7GSwx/",
@@ -112,7 +116,7 @@ if (slides.length > 1) {
   const dots = document.createElement("div"); dots.className = "dots";
   slides.forEach((_, i) => {
     const b = document.createElement("button");
-    b.setAttribute("aria-label", "Foto " + (i + 1));
+    b.setAttribute("aria-label", T("Foto ", "Photo ") + (i + 1));
     if (i === 0) b.classList.add("on");
     b.addEventListener("click", () => { show(i); restart(); });
     dots.appendChild(b);
@@ -138,8 +142,8 @@ if (slides.length > 1) {
 const lbImgs = [...document.querySelectorAll(".mosaic img, .buda img")];
 if (lbImgs.length) {
   const lb = document.createElement("div");
-  lb.className = "lb"; lb.setAttribute("role", "dialog"); lb.setAttribute("aria-modal", "true"); lb.setAttribute("aria-label", "Galería de fotos");
-  lb.innerHTML = '<img alt=""><button class="x" aria-label="Cerrar">×</button><button class="prev" aria-label="Foto anterior">‹</button><button class="next" aria-label="Foto siguiente">›</button><div class="cap"></div>';
+  lb.className = "lb"; lb.setAttribute("role", "dialog"); lb.setAttribute("aria-modal", "true"); lb.setAttribute("aria-label", T("Galería de fotos", "Photo gallery"));
+  lb.innerHTML = '<img alt=""><button class="x" aria-label="' + T("Cerrar", "Close") + '">×</button><button class="prev" aria-label="' + T("Foto anterior", "Previous photo") + '">‹</button><button class="next" aria-label="' + T("Foto siguiente", "Next photo") + '">›</button><div class="cap"></div>';
   document.body.appendChild(lb);
   const big = lb.querySelector("img"), cap = lb.querySelector(".cap");
   let at = 0;
@@ -182,7 +186,7 @@ if (count) {
   const pad = n => String(n).padStart(2, "0");
   const tick = () => {
     let s = Math.max(0, Math.floor((to - Date.now()) / 1000));
-    if (s === 0) { count.querySelector("small").textContent = "¡Ya empezó FLAY 2027!"; }
+    if (s === 0) { count.querySelector("small").textContent = T("¡Ya empezó FLAY 2027!", "FLAY 2027 has begun!"); }
     const d = Math.floor(s / 86400); s %= 86400;
     const h = Math.floor(s / 3600); s %= 3600;
     const m = Math.floor(s / 60); s %= 60;
@@ -196,7 +200,7 @@ const mapa = document.getElementById("mapaFrame");
 if (mapa) {
   const mIO = new IntersectionObserver(es => {
     if (!es[0].isIntersecting) return;
-    mapa.innerHTML = `<iframe src="${mapa.dataset.src}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de Casa Buda, Traslasierra"></iframe>`;
+    mapa.innerHTML = `<iframe src="${mapa.dataset.src}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="${T("Mapa de Casa Buda, Traslasierra", "Map of Casa Buda, Traslasierra")}"></iframe>`;
     mIO.disconnect();
   }, { rootMargin: "600px 0px" });
   mIO.observe(mapa);
@@ -255,7 +259,7 @@ form.addEventListener("submit", async ev => {
   }
   err.style.display = "none";
   const btn = document.getElementById("sendBtn");
-  btn.disabled = true; btn.textContent = "Enviando…";
+  btn.disabled = true; btn.textContent = T("Enviando…", "Sending…");
 
   const fd = new FormData(form);
   const body = new URLSearchParams();
@@ -272,8 +276,8 @@ form.addEventListener("submit", async ev => {
     document.getElementById("formOk").classList.add("show");
     modal.querySelector(".modal-panel").scrollTo({ top: 0, behavior: "smooth" });
   } catch (e) {
-    btn.disabled = false; btn.textContent = "Enviar inscripción";
-    err.textContent = "No pudimos enviar la inscripción. Probá de nuevo o escribinos por WhatsApp.";
+    btn.disabled = false; btn.textContent = T("Enviar inscripción", "Send registration");
+    err.textContent = T("No pudimos enviar la inscripción. Probá de nuevo o escribinos por WhatsApp.", "We couldn’t send your registration. Please try again or message us on WhatsApp.");
     err.style.display = "block";
   }
 });

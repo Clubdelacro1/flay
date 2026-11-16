@@ -489,3 +489,7 @@ footer.motif::after{opacity:.08;left:auto;right:var(--pad);top:70px;transform:no
 @media (max-width:640px){
   .hero .glass{bottom:64px;font-size:14px;padding:16px 18px}
 }
+
+/* selector de idioma ES / EN */
+.menu a.lang{font-weight:600;letter-spacing:.08em;background:rgba(255,255,255,.14)}
+.end a[hreflang]{color:inherit;text-decoration:underline;text-underline-offset:3px}
